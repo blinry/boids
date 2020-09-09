@@ -2,8 +2,11 @@ extends Node2D
 
 var velocity = Vector2(0, 100)
 
+func _ready():
+	$Timer.wait_time = rand_range(10, 20)
+	$Timer.start()
+
 func _process(delta):
-	#velocity += cohesion()*0.01
 	velocity += separation()*4
 	velocity += alignment()*0.05
 	
@@ -48,12 +51,16 @@ func separation():
 func edge_avoid():
 	var screen_size = get_viewport_rect().size
 	var change = Vector2.ZERO
-	if position.x < 100:
+	var edge = 200
+	if position.x < edge:
 		change += Vector2(1, 0)
-	if position.y < 100:
+	if position.y < edge:
 		change += Vector2(0, 1)
-	if position.x > screen_size.x-100:
+	if position.x > screen_size.x-edge:
 		change += Vector2(-1, 0)
-	if position.y > screen_size.y-100:
+	if position.y > screen_size.y-edge:
 		change += Vector2(0, -1)
 	return change
+
+func die():
+	queue_free()
