@@ -3,9 +3,10 @@ extends Node2D
 func _ready():
 	pass
 
-func _input(event):
-	if event is InputEventMouse and event.is_pressed():
-		var pod = preload("res://pod.tscn").instance()
-		pod.position = event.position
-		pod.rotation = rand_range(0, 2*PI)
+		
+func _process(delta):
+	if Input.is_action_pressed("spawn"):
+		var pod = preload("res://boid.tscn").instance()
+		pod.position = get_global_mouse_position()
+		pod.velocity = Vector2(rand_range(-300, 300), rand_range(-300, 300))
 		add_child(pod)

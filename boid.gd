@@ -1,10 +1,10 @@
 extends Node2D
 
-var speed = 1000
+var velocity = Vector2(0, 100)
 
 func _process(delta):
-	var movement = delta*Vector2(0, -speed).rotated(rotation)
-	position += movement
+	position += delta*velocity
+	rotation = velocity.angle()
 	
 	var screen_size = get_viewport_rect().size
 
