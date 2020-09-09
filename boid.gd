@@ -3,21 +3,24 @@ extends Node2D
 var velocity = Vector2(0, 100)
 
 func _process(delta):
-	if get_parent().average:
+	if get_parent().average_position:
 		velocity += cohesion()*10
-	velocity += separation()
+	velocity += separation()*0.2
+	if get_parent().average_velocity:
+		velocity += alignment()*0.05
 	
-	velocity += edge_avoid()*500
+	velocity += edge_avoid()*50
 	
-	velocity *= 0.99
+	velocity *= 0.995
 	
 	position += delta*velocity
 	rotation = velocity.angle()
 		
 func cohesion():
-	var change = (get_parent().average-position).normalized()
-	#print(change)
-	return change
+	return (get_parent().average_position-position).normalized()
+	
+func alignment():
+	return (get_parent().average_velocity-velocity)
 
 func separation():
 	var change = Vector2.ZERO
