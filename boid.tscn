@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://boid.gd" type="Script" id=1]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 28.5878
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 171.113
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 164.756
 
 [node name="Boid" type="Node2D" groups=[
 "boids",
@@ -12,3 +21,25 @@ rotation = 1.5708
 scale = Vector2( 0.5, 0.5 )
 color = Color( 0.345098, 0.360784, 0.705882, 1 )
 polygon = PoolVector2Array( -0.245453, -66.6254, 33.7319, 55.693, -0.245453, 29.1907, -31.5046, 56.3726 )
+
+[node name="SeparationVision" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SeparationVision"]
+shape = SubResource( 1 )
+
+[node name="AlignmentVision" type="Area2D" parent="."]
+visible = false
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AlignmentVision"]
+shape = SubResource( 3 )
+
+[node name="CohesionVision" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CohesionVision"]
+shape = SubResource( 2 )

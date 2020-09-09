@@ -3,31 +3,45 @@ extends Node2D
 var velocity = Vector2(0, 100)
 
 func _process(delta):
-	if get_parent().average_position:
-		velocity += cohesion()*10
-	velocity += separation()*0.2
-	if get_parent().average_velocity:
-		velocity += alignment()*0.05
+	velocity += cohesion()*0.01
+	velocity += separation()*4
+	velocity += alignment()*0.05
 	
 	velocity += edge_avoid()*50
 	
-	velocity *= 0.995
+	velocity *= 1.005
 	
 	position += delta*velocity
 	rotation = velocity.angle()
 		
 func cohesion():
-	return (get_parent().average_position-position).normalized()
+	var average = Vector2.ZERO
+	var areas = $CohesionVision.get_overlapping_areas()
+	if areas.size() == 0:
+		return average
+	for area in areas:
+		var boid = area.get_parent()
+		average += boid.position
+	average /= areas.size()
+	return (average - position)
 	
 func alignment():
-	return (get_parent().average_velocity-velocity)
+	var average = Vector2.ZERO
+	var areas = $AlignmentVision.get_overlapping_areas()
+	if areas.size() == 0:
+		return average
+	for area in areas:
+		var boid = area.get_parent()
+		average += boid.velocity
+	average /= areas.size()
+	return (average - velocity)
 
 func separation():
 	var change = Vector2.ZERO
-	for boid in get_tree().get_nodes_in_group("boids"):
+	for area in $SeparationVision.get_overlapping_areas():
+		var boid = area.get_parent()
 		var diff = (boid.position - position)
-		if diff.length() < 100:
-			change -= diff
+		change -= diff.normalized()
 	return change
 
 func edge_avoid():
