@@ -7,9 +7,10 @@ func _process(delta):
 	velocity += separation()*4
 	velocity += alignment()*0.05
 	
-	velocity += edge_avoid()*50
+	velocity += edge_avoid()*10
 	
-	#velocity *= 1.005
+	if velocity.length() < 300:
+		velocity *= 1.01
 	
 	position += delta*velocity
 	rotation = velocity.angle()
@@ -34,7 +35,7 @@ func alignment():
 		var boid = area.get_parent()
 		average += boid.velocity
 	average /= areas.size()
-	return (velocity - average)
+	return (average - velocity)
 
 func separation():
 	var change = Vector2.ZERO

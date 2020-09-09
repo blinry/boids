@@ -6,10 +6,10 @@
 radius = 28.5878
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 171.113
+radius = 97.8695
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 164.756
+radius = 108.848
 
 [node name="Boid" type="Node2D" groups=[
 "boids",
