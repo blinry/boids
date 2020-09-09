@@ -15,13 +15,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Pod" parent="." instance=ExtResource( 1 )]
-position = Vector2( 956.544, 477.061 )
+[node name="Boid" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1316.54, 543.347 )
 
-[node name="Pod2" parent="." instance=ExtResource( 1 )]
+[node name="Boid2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 529.887, 545.726 )
 rotation = 0.731293
 
-[node name="Pod3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 743.125, 679.509 )
+[node name="Boid3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 921.411, 886.366 )
 rotation = -0.364774
