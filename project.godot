@@ -15,12 +15,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Untitled Game"
+config/name="Boids"
 run/main_scene="res://main.tscn"
-
-[autoload]
-
-game="*res://game.gd"
 
 [display]
 

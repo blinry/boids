@@ -1,4 +1,4 @@
-name = "untitled-game"
+name = "boids"
 
 all: linux macos windows web
 
